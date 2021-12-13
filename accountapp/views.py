@@ -2,10 +2,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 
 # Create your views here.
+from rest_framework import authentication, permissions
 from rest_framework.decorators import api_view
 from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.response import Response
-
+from rest_framework.views import APIView
 
 from accountapp.models import NewModel
 from accountapp.serializers import NewModelSerializer, UserSerializer
@@ -45,3 +46,7 @@ class AccountCreateAPIView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = []
+
+
+def AccountLoginView(request):
+    return render(request, 'accountapp/login.html')
