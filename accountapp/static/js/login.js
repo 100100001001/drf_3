@@ -35,6 +35,7 @@ function send_input() {
             // Token 수령 후 쿠키 생성
             setCookie('drf_token', 'Token ' + response.data['token']);
 
+            // success_url 재연결
             window.location.href = '/accounts/hello_world_template/';
 
         })
