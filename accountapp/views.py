@@ -2,10 +2,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.generic import TemplateView
 from rest_framework import authentication, permissions
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import api_view
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -53,9 +54,21 @@ def AccountLoginView(request):
     return render(request, 'accountapp/login.html')
 
 
+class AccountRetrieveTemplateView(TemplateView):
+    template_name = 'accountapp/retrieve.html'
+
+
 class AccountRetrieveAPIView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserWithoutPasswordSerializer
 
     permission_classes = [permissions.AllowAny]
+    authentication_classes = [TokenAuthentication]
+
+
+class AccountUpdateAPIView(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserWithoutPasswordSerializer
+
+    permission_classes = []
     authentication_classes = [TokenAuthentication]
