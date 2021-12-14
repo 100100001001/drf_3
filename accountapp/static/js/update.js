@@ -32,8 +32,16 @@ function update_account(pk) {
             // handle error
             console.log(error);
 
+            if(error.response.status === 401) {
+            document.getElementById('alert_box').innerHTML
+                    = "<div class='btn btn-danger rounded-pill px-5'>인증 정보가 없어요!</div>"
+            } else if(error.response.status === 403) {
+            document.getElementById('alert_box').innerHTML
+                    = "<div class='btn btn-danger rounded-pill px-5'>권한이 없어요!</div>"
+            } else {
             document.getElementById('alert_box').innerHTML
                     = "<div class='btn btn-danger rounded-pill px-5'>업데이트 실패!</div>"
+            }
         })
         .then(function () {
             // always executed
