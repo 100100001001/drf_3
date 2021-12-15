@@ -1,7 +1,8 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
+
 
 class Profile(models.Model):
     owner = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
