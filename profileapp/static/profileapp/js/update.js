@@ -1,4 +1,18 @@
+function getCookie(name) {
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
 function initialize(pk) {
+    axios({
+        method: 'get',
+        url: '/profiles/' + pk,
+        headers: {
+            Authorization: decodeURIComponent(getCookie('drf_token'))
+        }
+    })
     axios.get('/profiles/' + pk )
         .then(function (response) {
             // handle success
@@ -37,7 +51,7 @@ function update_profile(pk) {
             // handle success
             console.log(response);
 
-            window.location.href = '/accounts/retrieve_template/' + response.data['owner']['id'];
+            window.location.href = '/accounts/retrieve_template/' + response.data['owner_id'];
         })
         .catch(function (error) {
             // handle error
