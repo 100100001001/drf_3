@@ -8,6 +8,7 @@ from io import BytesIO
 
 
 # Create your models here.
+from image_processing import thumbnail
 
 
 class Profile(models.Model):
@@ -23,20 +24,9 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
-        def generate_thumbnail(self):
-            if self.image:
-                img = Image.open(self.image)
+    def generate_thumbnail(self):
+        if self.image:
+            output = thumbnail.generate_thumbnail(self.image)
 
-                width, height = img.size
-                ratio = height / width
-                pixel = 250
-
-                img = img.convert("RGB")
-                img.thumbnail((pixel, round(ratio * pixel)))
-
-                output = BytesIO()
-                img.save(output, format='JPEG', quality=95)
-                output.seek(0)
-
-                self.thumb = InMemoryUploadedFile(output, "ImageField", self.image.name,
-                                                  'image/jpeg', sys.getsizeof(output), None)
+            self.thumb = InMemoryUploadedFile(output, "ImageField", self.image.name,
+                                              'image/jpeg', sys.getsizeof(output), None)
