@@ -29,5 +29,6 @@ urlpatterns = [
     path('delete_template/<int:pk>', AccountDestroyTemplateView.as_view(), name='delete_template'),
 
     path('<int:pk>', AccountRUDAPIView.as_view(), name='RUD'),
+
     path('token/', AccountTokenRetrieveAPIView.as_view(), name='token'),
 ]
