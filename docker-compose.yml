@@ -1,33 +1,33 @@
 version: "3.7"
 
 services:
-
-  nginx:
-    image: nginx:1.19.5
-    ports:
-      - mode: host
-        protocol: tcp
-        target: 80
-        published: 80
-    networks:
-      - drf_network
-    volumes:
-      - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
-      - drf_static:/data/static/
-      - drf_media:/data/media/
-      - drf_log:/var/log/nginx/
-
-  django:
-    image: drf_hehe:1.0
-    networks:
-      - drf_network
-    volumes:
-      - drf_static:/home/drf_3/staticfiles/
-      - drf_media:/home/drf_3/media/
-    secrets:
-      - DJANGO_SECRET_KEY
-      - MARIADB_USER
-      - MARIADB_PASSWORD
+#
+#  nginx:
+#    image: nginx:1.19.5
+#    ports:
+#      - mode: host
+#        protocol: tcp
+#        target: 80
+#        published: 80
+#    networks:
+#      - drf_network
+#    volumes:
+#      - /home/ubuntu/nginx.conf:/etc/nginx/nginx.conf
+#      - drf_static:/data/static/
+#      - drf_media:/data/media/
+#      - drf_log:/var/log/nginx/
+#
+#  django:
+#    image: drf_hehe:1.0
+#    networks:
+#      - drf_network
+#    volumes:
+#      - drf_static:/home/drf_3/staticfiles/
+#      - drf_media:/home/drf_3/media/
+#    secrets:
+#      - DJANGO_SECRET_KEY
+#      - MARIADB_USER
+#      - MARIADB_PASSWORD
 
   mariadb:
     image: mariadb:10.5
