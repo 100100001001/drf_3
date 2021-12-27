@@ -44,6 +44,6 @@ function send_input() {
             console.log(error);
 
             document.getElementById('alert_box').innerHTML
-                = "<div class='btn btn-danger rounded-pill px-5'>로그인 실패!</div>";
+                = "<div class='btn btn-danger rounded-pill px-5'>로그인이 실패했습니다</div>";
         });
 }

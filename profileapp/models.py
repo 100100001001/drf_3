@@ -1,11 +1,10 @@
 import sys
+from io import BytesIO
 
+from PIL import Image
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
-from PIL import Image
-from io import BytesIO
-
 
 # Create your models here.
 from django.db.models.signals import post_save
@@ -25,7 +24,9 @@ class Profile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-
-@receiver(post_save, sender=Profile)
-def async_generate_thumbnail(sender, instance=None, created=False, **kwargs):
-    tasks.generate_thumbnail_celery_lag.delay(instance.pk)
+    def save(self, async_func=False, *args, **kwargs):
+        if async_func:
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+            tasks.generate_thumbnail_celery_lag.delay(self.pk)

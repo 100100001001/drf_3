@@ -27,6 +27,6 @@ function send_input() {
             console.log(error);
 
             document.getElementById('alert_box').innerHTML
-                = "<div class='btn btn-danger rounded-pill px-5'>프로필 생성 실패!</div>"
+                = "<div class='btn btn-danger rounded-pill px-5'>프로필 생성에 실패했습니다</div>"
         });
 }
