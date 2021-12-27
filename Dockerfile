@@ -2,8 +2,6 @@ FROM python:3.9.0
 
 WORKDIR /home/
 
-RUN echo 'ee'
-
 RUN git clone https://github.com/100100001001/drf_3.git
 
 WORKDIR /home/drf_3/

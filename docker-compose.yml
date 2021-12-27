@@ -20,7 +20,7 @@ services:
       - drf_log:/var/log/nginx/
 
   django:
-    image: drf_hehe:1.0
+    image: drf_hehe:1.1
     networks:
       - drf_network
     volumes:
